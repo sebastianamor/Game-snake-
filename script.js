@@ -27,11 +27,30 @@ let boardSquares;
 let emptySquares;
 let moveInterval;
 
+const careteBoard = () => {
+    boardSquares.forEach( (row, rowIndex) => {
+        row.forEach( (column,columnndex) => {
+            const sqareValue = `${rowIndex}${columnndex}`;
+            const sqareElement = document.createElement('div');
+            sqareElement.setAttribute("class","square emptySquare");
+            sqareElement.setAttribute('id', sqareValue);
+            board.appendChild(sqareElement);
+            emptySquares.push(sqareValue);
+        })
+        
+    })
+
+}
+
 const setGame = () =>{
     snake = ["00","01","02","03"];
     score = snake.length;
     direction = "ArrowRight";
     boardSquares = Array.from(Array(boardSize), () => new Array (boardSize).fill(squareType.emptySquare));
+    console.log(boardSquares);
+    board.innerHTML ="";
+    emptySquares = [];
+    careteBoard();
 }
 
 const startGame = () => {
