@@ -1,7 +1,7 @@
 //HTML element 
 const board = document.getElementById("board");
 const scoreBoard = document.getElementById("scoreBoard");
-const startButton = document.getElementById("gameOver");
+const startButton = document.getElementById("start");
 
 // Game seatting 
 const boardSize = 10;
@@ -30,12 +30,12 @@ let moveInterval;
 const careteBoard = () => {
     boardSquares.forEach( (row, rowIndex) => {
         row.forEach( (column,columnndex) => {
-            const sqareValue = `${rowIndex}${columnndex}`;
-            const sqareElement = document.createElement('div');
-            sqareElement.setAttribute("class","square emptySquare");
-            sqareElement.setAttribute('id', sqareValue);
-            board.appendChild(sqareElement);
-            emptySquares.push(sqareValue);
+            const squareValue = `${rowIndex}${columnndex}`;
+            const squareElement = document.createElement('div');
+            squareElement.setAttribute("class","square emptySquare");
+            squareElement.setAttribute('id', squareValue);
+            board.appendChild(squareElement);
+            emptySquares.push(squareValue);
         })
         
     })
@@ -46,7 +46,7 @@ const setGame = () =>{
     snake = ["00","01","02","03"];
     score = snake.length;
     direction = "ArrowRight";
-    boardSquares = Array.from(Array(boardSize), () => new Array (boardSize).fill(squareType.emptySquare));
+    boardSquares = Array.from(Array(boardSize), () => new Array(boardSize).fill(squareType.emptySquare));
     console.log(boardSquares);
     board.innerHTML ="";
     emptySquares = [];
@@ -57,4 +57,4 @@ const startGame = () => {
     setGame();
 } 
 
-startButton.addEventListener("click",startGame);
+startButton.addEventListener("click", startGame );
