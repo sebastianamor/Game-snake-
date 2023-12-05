@@ -2,6 +2,7 @@
 const board = document.getElementById("board");
 const scoreBoard = document.getElementById("scoreBoard");
 const startButton = document.getElementById("start");
+const gameOverSign = document.getElementById('gameOver');
 
 // Game seatting 
 const boardSize = 10;
@@ -40,10 +41,10 @@ const drawSquare = (square, type) => {
     const [row , columns ] = square.split('');
     boardSquares[row][columns] = squareType [type];
     const squareElement = document.getElementById(square);
-    squareElement.setAttribute('class','square  ${type}');
+    squareElement.setAttribute('class','square ${type}');
 
     if(type === "emptySquare") {
-        emptySquares.push(square);
+        emptySquares.push(square); 
     } else {
         if (emptySquares.indexOf(square) !== -1 ) {
             emptySquares.splice(emptySquares.indexOf(square), 1);
@@ -51,6 +52,40 @@ const drawSquare = (square, type) => {
         }
     }
 } 
+
+const setDirection = newDirection => {
+    direction = newDirection;
+}
+
+const directionEvent = key => {
+    switch (key.code) {
+        case 'ArrowUp':
+            direction != "ArrowDown" && setDirection(key.code)
+            break;
+        case 'ArrowDown':
+            direction != "Arrowup" && setDirection(key.code)
+                break;
+        case 'Arrowleft':
+            direction != "ArrowRight" && setDirection(key.code)
+             break;
+        case 'Arrowright':
+            direction != "Arrowleft" && setDirection(key.code)
+                break;
+                             
+    }
+}
+
+const createRandomFood = () => {
+    const randomEmptySqure = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+    drawSquare(randomEmptySqure, "foodSquare");
+
+}
+
+const updateScore = () => {
+    scoreBoard.innerText = score;
+
+}
+
 
 const careteBoard = () => {
     boardSquares.forEach( (row, rowIndex) => {
@@ -80,9 +115,12 @@ const setGame = () =>{
 
 const startGame = () => {
     setGame();
-    gameOverSing.style.displey = "none";
+    gameOverSign.style.displey = "none";
     startButton.displey = true;
-    drawSneke();
+    drawSnake();
+    updateScore();
+    createRandomFood();
+    document.addEventListener("keydown",dictionEvent);
 } 
 
 startButton.addEventListener("click", startGame );

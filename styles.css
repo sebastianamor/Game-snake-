@@ -28,7 +28,7 @@
 #start {
     background-color: aqua;
     border: none;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 #scoreBoard {
@@ -43,8 +43,8 @@
     background-color: aquamarine;
 }
 
-.snakeSquare{
-    background-color: green;
+.snakeSquar{
+    background-color: rgb(128, 41, 0);
     border: 1px solid #000;
 }
 
