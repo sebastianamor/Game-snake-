@@ -53,6 +53,23 @@ const drawSquare = (square, type) => {
     }
 } 
 
+const moveSnake = () =>{
+    const newSquare = String (
+        Number (snake[snake.length - 1]) + direction[direction])
+       .padStart(2,"0");
+    const [row , column] = newSquare.split('');
+       
+    if (newSquare  , 0 || 
+        newSquare > boardSize * boardSize || 
+        (direction === "ArrowRight" && column == 0 ) ||
+        ( direction === "ArrowLeft"  &&  column == 9 ||
+        boardSquares[row] [column] === squareType.snakeSquare)) {
+        } else {
+            
+        }
+      
+}
+
 const setDirection = newDirection => {
     direction = newDirection;
 }
@@ -120,7 +137,8 @@ const startGame = () => {
     drawSnake();
     updateScore();
     createRandomFood();
-    document.addEventListener("keydown",dictionEvent);
+    document.addEventListener("keydown",directionEvent);
+    moveInterval = setInterval(() => moveSneke(), gameSpeed );
 } 
 
 startButton.addEventListener("click", startGame );
