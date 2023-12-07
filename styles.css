@@ -40,15 +40,14 @@
 }
 
 .emptySquare{
-    background-color: aquamarine;
+    background-color: rgb(94, 240, 10)
 }
 
 .snakeSquar{
     background-color: rgb(128, 41, 0);
-    border: 1px solid #000;
 }
 
-.foodSqare {
+.foodSquare {
     background-color: red;
-    border: 1px solid #000;
+    
 }

@@ -6,7 +6,8 @@ const gameOverSign = document.getElementById('gameOver');
 
 // Game seatting 
 const boardSize = 10;
-const gameSpeed = 100;
+const gameSpeed = 70;
+let blockedButtons = false;
 const squareType = {
     emptySquare: 0,
     snakeSquare: 1,
@@ -55,7 +56,7 @@ const drawSquare = (square, type) => {
 
 const moveSnake = () =>{
     const newSquare = String (
-        Number (snake[snake.length - 1]) + direction[direction])
+        Number (snake[snake.length - 1]) + directions[direction])
        .padStart(2,"0");
     const [row , column] = newSquare.split('');
        
@@ -63,11 +64,32 @@ const moveSnake = () =>{
         newSquare > boardSize * boardSize || 
         (direction === "ArrowRight" && column == 0 ) ||
         ( direction === "ArrowLeft"  &&  column == 9 ||
-        boardSquares[row] [column] === squareType.snakeSquare)) {
+        boardSquares[row][column] === 1)) {
+        gameOver();
         } else {
-            
+            snake.push(newSquare);
+            if(boardSquares [row][column] === 2 ){
+                 addFood();
+            } else {
+                const emptySquare = snake.shift();
+                drawSquare(emptySquare,'emptySquare', 0);
+            }
+            drawSnake();
         }
       
+}
+
+ const addFood = () => {
+    score++;
+    updateScore();
+    createRandomFood();
+ }
+
+
+const gameOver = () => {
+    gameOverSign.style.display = 'block';
+    clearInterval(moveInterval)
+    startButton.disabled = false;
 }
 
 const setDirection = newDirection => {
@@ -82,11 +104,11 @@ const directionEvent = key => {
         case 'ArrowDown':
             direction != "Arrowup" && setDirection(key.code)
                 break;
-        case 'Arrowleft':
+        case 'ArrowLeft':
             direction != "ArrowRight" && setDirection(key.code)
              break;
         case 'Arrowright':
-            direction != "Arrowleft" && setDirection(key.code)
+            direction != "ArrowLeft" && setDirection(key.code)
                 break;
                              
     }
@@ -138,7 +160,7 @@ const startGame = () => {
     updateScore();
     createRandomFood();
     document.addEventListener("keydown",directionEvent);
-    moveInterval = setInterval(() => moveSneke(), gameSpeed );
+    moveInterval = setInterval(() => moveSnake(), gameSpeed );
 } 
 
 startButton.addEventListener("click", startGame );
