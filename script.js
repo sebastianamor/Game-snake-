@@ -6,8 +6,8 @@ const gameOverSign = document.getElementById('gameOver');
 
 // Game seatting 
 const boardSize = 10;
-const gameSpeed = 70;
-let blockedButtons = false;
+const gameSpeed = 100;
+let blockedButtons = false; //warnig 
 const squareType = {
     emptySquare: 0,
     snakeSquare: 1,
@@ -39,8 +39,8 @@ const drawSnake = () => {
 //type : tipos de cuadrado (emptySquare, snakeSquare , foodSquare)
 
 const drawSquare = (square, type) => {
-    const [row , columns ] = square.split('');
-    boardSquares[row][columns] = squareType [type];
+    const [row , column ] = square.split('');
+    boardSquares[row][column] = squareType[type];
     const squareElement = document.getElementById(square);
     squareElement.setAttribute('class','square ${type}');
 
@@ -107,7 +107,7 @@ const directionEvent = key => {
         case 'ArrowLeft':
             direction != "ArrowRight" && setDirection(key.code)
              break;
-        case 'Arrowright':
+        case 'ArrowRight':
             direction != "ArrowLeft" && setDirection(key.code)
                 break;
                              
@@ -128,10 +128,10 @@ const updateScore = () => {
 
 const careteBoard = () => {
     boardSquares.forEach( (row, rowIndex) => {
-        row.forEach( (column,columnndex) => {
+        row.forEach( (column ,columnndex) => {
             const squareValue = `${rowIndex}${columnndex}`;
             const squareElement = document.createElement('div');
-            squareElement.setAttribute("class","square emptySquare");
+            squareElement.setAttribute('class','square emptySquare');
             squareElement.setAttribute('id', squareValue);
             board.appendChild(squareElement);
             emptySquares.push(squareValue);
@@ -155,7 +155,7 @@ const setGame = () =>{
 const startGame = () => {
     setGame();
     gameOverSign.style.displey = "none";
-    startButton.displey = true;
+    startButton.disabled = true;
     drawSnake();
     updateScore();
     createRandomFood();
