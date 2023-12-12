@@ -7,7 +7,7 @@ const gameOverSign = document.getElementById('gameOver');
 // Game seatting 
 const boardSize = 10;
 const gameSpeed = 100;
-let blockedButtons = false; //warnig 
+let blockedButtons = false; 
 const squareType = {
     emptySquare: 0,
     snakeSquare: 1,
@@ -42,7 +42,7 @@ const drawSquare = (square, type) => {
     const [row , column ] = square.split('');
     boardSquares[row][column] = squareType[type];
     const squareElement = document.getElementById(square);
-    squareElement.setAttribute('class','square ${type}');
+    squareElement.setAttribute('class', `square ${type}`);
 
     if(type === "emptySquare") {
         emptySquares.push(square); 
